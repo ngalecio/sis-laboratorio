@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Auth;
+
 class ConsultaController extends Controller
 {
     /**
@@ -30,7 +32,7 @@ class ConsultaController extends Controller
 
 
         // Consulta Eloquent con relación a Cliente
-        $query = Consulta::with('paciente:id,nombres,apellidos,cedula,telefono,email')
+        $query = Consulta::with('paciente:id,nombres,apellidos,cedula,telefono,email', 'usuario:id,name')
             ->select(
                 'id',
                 'fecha',
@@ -44,7 +46,8 @@ class ConsultaController extends Controller
                 'alergias',
                 'medicamentos',
                 'antecedentes_personales',
-                'antecedentes_familiares'
+                'antecedentes_familiares',
+                'usuario_creacion_id'
             );
 
         
@@ -87,6 +90,8 @@ class ConsultaController extends Controller
         //             ->orWhere('comentario_4', 'like', '%' . $buscar . '%');
         //     });
         // }
+
+     //   $query->where('usuario_creacion_id', auth()->id());
         $query->orderBy('fecha', 'desc');
 
 
@@ -302,7 +307,7 @@ class ConsultaController extends Controller
         Log::info('info del formulario', ['request' => $request->all(), 'Id' => $id]);
 
         // return response()->json(['success' => false, 'message' => 'Función registrar llamada correctamente.','request' => $request->all()   ], 401);
-
+        $operacion = $id == 0 ? 'registrar' : 'actualizar';
         try {
             $consulta = Consulta::find($id);
 
@@ -356,6 +361,12 @@ class ConsultaController extends Controller
             $consulta->medicamentos = $request->medicamentos ?? '';
             $consulta->antecedentes_personales = $request->antecedentes_personales ?? '';
             $consulta->antecedentes_familiares = $request->antecedentes_familiares ?? '';
+
+            if ($operacion == 'registrar') {
+                $consulta->usuario_creacion_id = auth()->user()->id;;
+            } else {
+                $consulta->usuario_modificacion_id = auth()->user()->id;;
+            }   
             $consulta->save();
 
 
@@ -394,7 +405,9 @@ class ConsultaController extends Controller
               
                     $stock_nuevo_fraccion = 0;
                     $stock_nuevo = 0;
-       
+                    $multiplos = 1;
+                    $residuo=0;
+                    $detalleModel->unidad_medida="UNIDAD";
                     if ($detalleModel->unidad_medida!="UNIDAD") {
                         $multiplos = intdiv($detalle['cantidad'], $producto->cantidad_por_unidad);
                         $residuo = $detalle['cantidad'] % $producto->cantidad_por_unidad;
@@ -505,6 +518,54 @@ class ConsultaController extends Controller
         }
     }
 
+
+    public function reporteOrdenPDF(Request $request)
+    {
+        $id = $request->get('id');
+
+
+       
+        $consulta = Consulta::select(
+            'id',
+            'fecha',
+            'paciente_id',
+            'tipo_consulta',
+            'comentario_1',
+            'comentario_2',
+            'comentario_3',
+            'comentario_4',
+            'establecimiento',
+            'alergias',
+            'medicamentos',
+            'antecedentes_personales',
+            'antecedentes_familiares'
+        )
+            ->with([
+                'paciente:id,nombres,apellidos,direccion,telefono,email,cedula',
+                'detalles:id,consulta_id,producto_id,cantidad,precio,total',
+                'detalles.producto:id,nombre,descripcion,codigo',
+            ])
+            ->find($id);
+
+           
+        $pdf = Pdf::setOptions([
+            'isHtml5ParserEnabled' => true,
+            'isRemoteEnabled' => true,
+            'defaultFont' => 'DejaVu Sans'
+        ]);
+
+        // $pdf= Pdf::loadView('admin.pacientes.reporte', ['paciente' => $paciente]);
+        // $pdf->setPaper('a4', 'portrait');
+        // return $pdf->stream('reporte_paciente_'.$id.'.pdf');
+        $ajuste = Ajuste::first();
+        $pdf->loadView('admin.consultas.plantillaorden', compact('consulta', 'ajuste'));
+        $pdf->setPaper('a4', 'portrait');
+
+        $nombreArchivo = 'orden-' . ($consulta->id) . '.pdf';
+
+
+        return $pdf->stream($nombreArchivo);
+    }
 
     public function remove_imagen(String $id)
     {

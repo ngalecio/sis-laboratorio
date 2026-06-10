@@ -5,7 +5,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h4>Atenciones Registradas
+                <h4>Ordenes de Laboratorio
                                     <button id="btn-crear-pdf" type="button" class="btn btn-primary" style="float: right; margin-left: 10px;"
                                         onclick="reporte_consultas_pdf()">
                                         <i class="bi bi-file-earmark-pdf"></i> PDF
@@ -59,15 +59,15 @@
                                 <table class="table table-bordered table-hover table-striped">
                                     <thead>
                                         <th>#</th>
-                                        <th>ID Atención</th>
-                                        <th>Paciente</th>
-                                        <th>Fecha</th>
-                                        <th>Tipo Atención</th>
-                                        <th>Productos que usa</th>
-                                        <th>Historia Capilar</th>
-                                        <th>Alergias</th>
-                                        <th>Antecedentes de Procesos Químicos</th>
-                                        <th>Tiene Caídas</th>
+                                <th>Orden</th>
+                                <th>Paciente</th>
+                                <th>Fecha</th>
+                                <th>Tipo Orden</th>
+                                <th>Medicacion Continua</th>
+                                <th>Antecedentes Personales</th>
+                                <th>Alergias</th>
+                                <th>Antecedentes Familiares</th>
+                                <th>Usuario</th>
                                         <th class="text-center">Acciones</th>
                                     </thead>
                                     <tbody>
@@ -77,12 +77,12 @@
                                             <td>{{ $consulta->id }}</td>
                                             <td>{{ $consulta->paciente->apellidos ?? '' }} {{ $consulta->paciente->nombres ?? '' }}</td>
                                             <td>{{ \Carbon\Carbon::parse($consulta->fecha)->format('d/m/Y') }}</td>
-                                            <td>{{ $consulta->tipo_atencion }}</td>
+                                            <td>{{ $consulta->tipo_consulta }}</td>
                                             <td>{{ $consulta->medicamentos }}</td>
                                             <td>{{ $consulta->antecedentes_familiares }}</td>
                                             <td>{{ $consulta->alergias }}</td>
                                             <td>{{ $consulta->antecedentes_personales }}</td>
-                                            <td>{{ $consulta->comentario_4 }}</td>
+                                            <td>{{ $consulta->usuario->name ?? '' }}</td>
                                 
                                             <td class="text-center">
                                 

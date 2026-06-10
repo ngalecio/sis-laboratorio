@@ -5,7 +5,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h4>Clientes Registrados
+                <h4>Pacientes Registrados
                     <a href="{{ url('/admin/pacientes/0/edit') }}" style="float: right; margin-left: 10px;" class="btn btn-primary">
                         <i class="bi bi-plus"></i> Crear Nuevo</a>
 
@@ -38,6 +38,7 @@
                             <th>Cédula</th>
                             <th>Teléfono</th>
                             <th>Email</th>
+                            <th>Usuario</th>
                             <th class="text-center">Acciones</th>
                         </tr>
                     </thead>
@@ -51,13 +52,12 @@
                             <td>{{ $paciente->cedula }}</td>
                             <td>{{ $paciente->telefono }}</td>
                             <td>{{ $paciente->email }}</td>
+                            <td>{{ $paciente->usuario->name ?? 'N/A' }}</td>
                             <td class="text-center">
-                                <a href="{{ url('/admin/pacientes/'.$paciente->id) }}" class="btn btn-sm btn-info ">
-                                    <i class="bi bi-eye"></i>Ver
-                                </a>
+    
                                 <a href="{{ url('/admin/pacientes/'.$paciente->id.'/edit') }}"
                                     class="btn btn-sm btn-success "><i class="bi bi-pencil"></i>
-                                    Editar
+                                    
                                 </a>
                                 <form action="{{ url('/admin/pacientes/delete/'.$paciente->id) }}" method="POST"
                                     id="delete-form-{{ $paciente->id }}" style="display: inline-block;">
@@ -65,7 +65,7 @@
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger "
                                         onclick="preguntar({{$paciente->id}}, event);">
-                                        <i class="bi bi-trash"></i>Eliminar</button>
+                                        <i class="bi bi-trash"></i></button>
                                 </form>
                                 <script>
                                     function preguntar(id, event) {

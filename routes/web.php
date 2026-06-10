@@ -101,6 +101,7 @@ Route::get('/admin/productos', [ProductoController::class, 'index'])->name('admi
 Route::get('/admin/productos/create', [ProductoController::class, 'create'])->name('admin.productos.create')->middleware('auth');
 Route::post('/admin/productos/create', [ProductoController::class, 'store'])->name('admin.productos.store')->middleware('auth');
 Route::get('/admin/productos/productos-list', [ProductoController::class, 'listJsonProductos'])->name('admin.productos.listado')->middleware('auth');
+Route::get('/admin/productos/productos-list-examenes', [ProductoController::class, 'listJsonProductosExamen'])->name('admin.productos.listado_examen')->middleware('auth');
 
 Route::get('/admin/productos/insumos-list', [ProductoController::class, 'listJsonInsumos'])->name('admin.productos.list')->middleware('auth');
 Route::get('/admin/productos/kardex-list', [ProductoController::class, 'listJsonKardex'])->name('admin.productos.listkardex')->middleware('auth');
@@ -205,6 +206,7 @@ Route::get('/admin/consultas/{id}/edit', [ConsultaController::class, 'edit'])->n
 Route::put('/admin/consultas/registrar/{id}', [ConsultaController::class, 'registrar'])->name('admin.consultas.registrar')->middleware('auth');
 Route::post('/admin/consultas/{id}/upload_imagen', [ConsultaController::class, 'upload_imagen'])->name('admin.consultas.upload_imagen')->middleware('auth');
 Route::delete('/admin/consultas/{id}/remove_imagen', [ConsultaController::class, 'remove_imagen'])->name('admin.consultas.remove_imagen')->middleware('auth');
+Route::post('/admin/consultas/reportepdf', [ConsultaController::class, 'reporteOrdenPDF'])->name('admin.consultas.reporteordenpdf')->middleware('auth');
 
 
 Route::get('/admin/compras', [ComprobanteCabeceraController::class, 'lista_compras'])->name('admin.compras.index')->middleware('auth');

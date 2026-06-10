@@ -39,11 +39,11 @@
             margin-top: 10px;
         }
     </style>
-    <title>Compra</title>
+    <title>Orden</title>
 </head>
 <body>
     <div class="container">
-        <!-- CABECERA DE COMPRA -->
+        <!-- CABECERA DE ORDEN -->
         <table>
             <tr>
                 <th colspan="6" style="text-align:center; background:#fff;">
@@ -56,19 +56,19 @@
                 </th>
             </tr>
             <tr>
-                <td colspan="3"><strong>Compra N°:</strong> {{ $compra->numero_comprobante ?? '-' }}</td>
-                <td colspan="3"><strong>Fecha:</strong> {{ $compra->fecha ? \Carbon\Carbon::parse($compra->fecha)->format('d/m/Y') : '-' }}</td>
+                <td colspan="3"><strong>Orden N°:</strong> {{ $consulta->id ?? '-' }}</td>
+                <td colspan="3"><strong>Fecha:</strong> {{ $consulta->fecha ? \Carbon\Carbon::parse($consulta->fecha)->format('d/m/Y') : '-' }}</td>
             </tr>
             <tr>
-                <td colspan="3"><strong>Proveedor:</strong> {{ $compra->cliente->nombres ?? '-' }} {{ $compra->cliente->apellidos ?? '' }}</td>
-                <td colspan="3"><strong>Cédula:</strong> {{ $compra->cliente->cedula ?? '-' }}</td>
+                <td colspan="3"><strong>Cliente:</strong> {{ $consulta->paciente->nombres ?? '-' }} {{ $consulta->paciente->apellidos ?? '' }}</td>
+                <td colspan="3"><strong>Cédula:</strong> {{ $consulta->paciente->cedula ?? '-' }}</td>
             </tr>
             <tr>
-                <td colspan="3"><strong>Dirección:</strong> {{ $compra->cliente->direccion ?? '-' }}</td>
-                <td colspan="3"><strong>Teléfono:</strong> {{ $compra->cliente->telefono ?? '-' }}</td>
+                <td colspan="3"><strong>Dirección:</strong> {{ $consulta->paciente->direccion ?? '-' }}</td>
+                <td colspan="3"><strong>Teléfono:</strong> {{ $consulta->paciente->telefono ?? '-' }}</td>
             </tr>
         </table>
-        <!-- DETALLE DE COMPRA -->
+        <!-- DETALLE DE ORDEN -->
         <table>
             <thead>
                 <tr>
@@ -83,7 +83,7 @@
             </thead>
             <tbody>
                 @php $i = 1; @endphp
-                @foreach($compra->detalles as $detalle)
+                @foreach($consulta->detalles as $detalle)
                 <tr>
                     <td>{{ $i++ }}</td>
                     <td>{{ $detalle->producto->nombre ?? '-' }}</td>
@@ -95,19 +95,19 @@
                 </tr>
                 @endforeach
             </tbody>
-            <tfoot>
+            <!-- <tfoot>
                 <tr>
                     <th colspan="6" style="text-align:right;">Subtotal</th>
-                    <td style="text-align:right; font-weight:bold;">{{ number_format($compra->valor_subtotal, 2) }}</td>
+                    <td style="text-align:right; font-weight:bold;">{{ number_format($consulta->valor_subtotal, 2) }}</td>
                 </tr>
                 <tr>
                     <th colspan="6" style="text-align:right;">IVA</th>
-                    <td style="text-align:right; font-weight:bold;">{{ number_format($compra->valor_iva, 2) }}</td>
+                    <td style="text-align:right; font-weight:bold;">{{ number_format($consulta->valor_iva, 2) }}</td>
                 </tr>
                 <tr>
                     <th colspan="6" style="text-align:right;">Total</th>
-                    <td style="text-align:right; font-weight:bold;">{{ number_format($compra->valor_total, 2) }}</td>
-                </tr>
+                    <td style="text-align:right; font-weight:bold;">{{ number_format($consulta->valor_total, 2) }}</td>
+                </tr> -->
             </tfoot>
         </table>
         <!-- PIE DE PÁGINA -->
@@ -128,7 +128,7 @@
             $size = 9;
             $color = array(0.5, 0.5, 0.5);
             $pdf->page_text(720, 565, $text, $font, $size, $color);
-            $pdf->page_text(30, 565, "Compra", $font, $size, $color);
+            $pdf->page_text(30, 565, "Orden de Consulta", $font, $size, $color);
         }
     </script>
 </body>

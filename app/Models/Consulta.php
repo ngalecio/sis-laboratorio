@@ -38,4 +38,8 @@ class Consulta extends Model
     {
         return $this->hasMany(ConsultaDetalle::class);
     }
+    public function usuario()
+    {
+        return $this->belongsTo(User::class, 'usuario_creacion_id', 'id');
+    }
 }

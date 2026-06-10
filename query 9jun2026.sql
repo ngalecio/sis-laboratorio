@@ -1,5 +1,175 @@
 select * from productos
 
+select * from categorias
+
+
+ALTER TABLE categorias
+ADD COLUMN pagina TINYINT UNSIGNED,
+ADD COLUMN fila TINYINT UNSIGNED,
+ADD COLUMN col TINYINT UNSIGNED,
+ADD COLUMN col2 TINYINT UNSIGNED,
+ADD COLUMN orden TINYINT UNSIGNED;
+
+ALTER TABLE categorias
+ADD COLUMN ancho_col TINYINT UNSIGNED
+
+ALTER TABLE productos
+ADD COLUMN col TINYINT UNSIGNED,
+ADD COLUMN ancho_col TINYINT UNSIGNED
+
+
+update productos set col = 1, ancho_col = 12
+
+select * from categorias
+/*10 bioquimica*/
+
+select * from productos where categoria_id = 10
+
+update productos 
+set ancho_col = 6
+where categoria_id = 10
+
+
+select * from productos where categoria_id = 28
+
+update productos 
+set ancho_col = 6
+where categoria_id = 28
+
+
+
+ where categoria_id = 27
+
+select * from productos where categoria_id = 25
+
+select * from consulta_detalles
+
+
+update productos set precio = 1.5
+
+
+update productos 
+set ancho_col = 6
+where categoria_id = 27
+
+
+
+
+
+update productos 
+set ancho_col = 3
+where categoria_id = 26
+
+select * from productos where categoria_id = 16
+
+select * from productos where categoria_id = 13
+
+
+select * from productos where categoria_id = 15
+
+select * from productos where categoria_id = 40
+
+select productos.* from productos join categorias on categoria_id = categorias.id 
+where 
+categorias.pagina in (2) and categorias.fila = 1 and categorias.col = 1;
+
+
+
+
+update categorias set ancho_col = 4
+
+
+INSERT INTO `db_laboratorio`.`categorias` (`id`, `nombre`, `slug`, `descripcion`, `created_at`, `updated_at`) VALUES (1, 'SHAMPOO', 'shampoo', NULL, NULL, NULL);
+
+
+select * from catalogo_examenes
+select distinct categoria,page,fila,col,IFNULL(col2,'0') as col2
+from catalogo_examenes where page = 1
+
+
+
+
+delete from categorias;
+
+ALTER TABLE categorias AUTO_INCREMENT = 1;
+
+
+iNSERT INTO `db_laboratorio`.`categorias` (`nombre`, `slug`, `descripcion`, `pagina`, `fila`,`col`,`col2`,`orden`)
+SELECT DISTINCT
+    categoria as nombre,
+		'' as slug,
+		'' as descripcion,
+    CAST(page AS UNSIGNED) AS pagina,
+    CAST(fila AS UNSIGNED) AS fila,
+    CAST(col AS UNSIGNED) AS col,
+    CAST(IFNULL(col2,'0') AS UNSIGNED) AS col2,
+		 CAST(IFNULL(orden,'0') AS UNSIGNED) AS orden
+FROM catalogo_examenes
+WHERE CAST(page AS UNSIGNED) = 2;
+WHERE CAST(page AS UNSIGNED) = 1;
+
+select id,nombre,pagina,fila,col,col2,orden,ancho_col 
+from categorias
+where pagina in ( 1,2) and fila = 1 and col = 1;
+
+select * from categorias where pagina= 2 and fila = 1 and col = 1
+
+
+select * from productos where categoria_id = 47
+
+
+delete from productos;
+
+ALTER TABLE productos AUTO_INCREMENT = 1;
+
+
+select * from productos where col is null
+
+delete from productos where col is null
+
+
+INSERT INTO `db_laboratorio`.`productos` (`codigo`, `nombre`, `descripcion`, `lote`, `categoria_id`, `presentacion_id`, `imagen`, `lote_estandar`, `registro_sanitario`, `tipo_receta`, `version`, `stock`, `precio`, `costo`, `imprime_receta`, `tipo_producto`, `aplica_iva`, `aplica_ice`, `provedor_id`, `porcentaje_ice`, `tipo_contribuyente`, `presentacion`, `v_min`, `v_max`, `v_med`, `prescripcion`, `id_producto`, `precio_compra`, `fecha_compra`, `costo_promedio`, `estado`, `created_at`, `updated_at`, `unidad_medida`, `cantidad_medida`, `cantidad_por_unidad`, `stock_fraccion`) 
+
+select 
+ cast(linea as char) as codigo, examen as nombre , NULL, '', b.id, 1, 'productos/1tO4HhW4TRkOHHQkeFrsd49MCTGQaLjBK1khGN60.jpg'
+ , 1.00000, '0', NULL, NULL, 109.00, 48.00, 0.00, 'N', 'B', '0', '0', 0, 0.00000, NULL, NULL
+ , 48.00000, 48.00000, 48.00000, NULL, NULL, 48.00000, '2025-09-17', 24.00000, 'A'
+ , NULL, '2026-03-27 11:09:33', 'UNIDAD', NULL, 300.00, 280.00
+ 
+ from catalogo_examenes a join categorias  b   ON a.categoria COLLATE utf8mb4_unicode_ci = b.nombre
+ where a.page = 2;
+ where a.page = 1;
+ 
+ select * from productos where codigo in ('357','358')
+ 
+ select * from categorias where id = 11
+ 
+ select id,nombre,pagina,fila,col,col2,orden,ancho_col from categorias where pagina = 2
+
+545
+delete from catalogo_examenes;
+select * from catalogo_examenes 
+ where page = 2
+ order by categoria
+ 
+
+
+
+select * from categorias order by nombre
+
+
+
+CREATE TABLE productos_bk AS
+SELECT *
+FROM productos;
+
+CREATE TABLE categorias_bk AS
+SELECT *
+FROM categorias;
+
+
+select * from ajustes
+
 select * from comprobante_cabeceras where tipo_comprobante = 'AJ'
 
 select * from comprobante_detalles 

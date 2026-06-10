@@ -12,12 +12,12 @@
                 <ul class="nav nav-tabs" id="myTabPaciente" role="tablist">
                     <li class="nav-item" role="presentation">
                         <a class="nav-link active" id="paciente-tab" data-bs-toggle="tab" href="#paciente" role="tab"
-                            aria-controls="paciente" aria-selected="true">Cliente</a>
+                            aria-controls="paciente" aria-selected="true">Paciente</a>
                     </li>
                     @if(isset($paciente->id) && $paciente->id)
                     <li class="nav-item" role="presentation">
                         <a class="nav-link" id="paciente-consulta-tab" data-bs-toggle="tab" href="#paciente-consulta"
-                            role="tab" aria-controls="paciente-consulta" aria-selected="false">Atención </a>
+                            role="tab" aria-controls="paciente-consulta" aria-selected="false">Orden de Laboratorio </a>
                     </li>
                     <li class="nav-item" role="presentation">
                         <a class="nav-link" id="historial-tab" data-bs-toggle="tab" href="#historial" role="tab"
@@ -32,8 +32,8 @@
                             <div class="card">
 
                                 <div class="card-header">
-                                    <h4>{{ isset($paciente->id) && $paciente->id ? 'Edición de Cliente' : 'Registrar
-                                        Cliente' }}
+                                    <h4>{{ isset($paciente->id) && $paciente->id ? 'Edición de Paciente' : 'Registrar
+                                        Paciente' }}
                                         @if(isset($paciente->id) && $paciente->id)
                                         <button type="button" class="btn btn-success"
                                             style="float: right; margin-left: 10px;"
@@ -267,7 +267,7 @@
                                                 <div class="card">
 
                                                     <div class="card-header">
-                                                        <h4>Fotos del Cliente
+                                                        <h4>Fotos del Paciente
                                                             <div style="float: right;">
                                                                 <button type="button" class="btn btn-primary"
                                                                     onclick="mostrarModalImagenCliente()">
@@ -369,7 +369,7 @@
                         aria-labelledby="paciente-consulta-tab">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Cliente: {{ $paciente->nombres ?? '' }} {{ $paciente->apellidos ?? '' }}
+                                <h4>Paciente: {{ $paciente->nombres ?? '' }} {{ $paciente->apellidos ?? '' }}
                                     <button id="btn-consultar" type="button" class="btn btn-info"
                                         style="float: right; margin-left: 10px;" onclick="consultar_cita();">
                                         <i class="bi bi-search"></i> Consultar
@@ -379,17 +379,22 @@
                                         style="float: right; margin-left: 10px;" onclick="registrar_cita();">
                                         <i class="bi bi-plus"></i> Registrar
                                     </button>
-                                    <button id="btn-nuevo" type="button" class="btn btn-success" style="float: right;"
-                                        onclick="nueva_cita();">
+                                    <button id="btn-nuevo" type="button" class="btn btn-success"
+                                        style="float: right; margin-left: 10px;" onclick="nueva_cita();">
                                         <i class="bi bi-person-plus"></i> Nuevo
+                                    </button>
+
+                                    <button type="button" class="btn btn-primary btn-reporte"
+                                        style="float: right; margin-left: 10px;" onclick="reporte_orden_pdf()">
+                                        <i class="bi bi-file-earmark-pdf"></i> PDF
                                     </button>
                                 </h4>
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="id-consulta" class="form-label">N° Atención</label>
+                                            <label for="id-consulta" class="form-label">N° Orden</label>
                                             <div class="input-group">
                                                 <span class="input-group-text"><i class="bi bi-hash"></i></span>
                                                 <input type="text" name="id-consulta" id="id-consulta"
@@ -397,24 +402,24 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="fecha_consulta" class="form-label">Fecha de Atención</label>
+                                            <label for="fecha_consulta" class="form-label">Fecha de Orden</label>
                                             <div class="input-group">
                                                 <span class="input-group-text"><i
                                                         class="bi bi-calendar-date"></i></span>
                                                 <input type="date" name="fecha-consulta" id="fecha-consulta"
                                                     value="{{ old('fecha-consulta') }}" class="form-control"
-                                                    placeholder="Seleccione la fecha de atención">
+                                                    placeholder="Seleccione la fecha de Orden">
                                             </div>
                                             @error('fecha-consulta')
                                             <small class="text-danger">{{ $message }}</small>
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="tipo_consulta" class="form-label">Tipo de Atención</label>
+                                            <label for="tipo_consulta" class="form-label">Tipo de Orden</label>
                                             <div class="input-group">
                                                 <span class="input-group-text"><i class="bi bi-list-check"></i></span>
                                                 <select name="tipo-consulta" id="tipo-consulta" class="form-select"
@@ -436,6 +441,76 @@
                                             @enderror
                                         </div>
                                     </div>
+
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="medicamentos" class="form-label">Medicacion Continua</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text"><i class="bi bi-capsule"></i></span>
+                                                <textarea name="medicamentos" id="medicamentos" class="form-control"
+                                                    rows="3"
+                                                    placeholder="Ingrese Medicacion Continua">{{ old('medicamentos') }}</textarea>
+                                            </div>
+                                            @error('medicamentos')
+                                            <small class="text-danger">{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="antecedentes_personales" class="form-label">
+                                                Antecedentes Personales
+                                            </label>
+                                            <div class="input-group">
+                                                <span class="input-group-text"><i class="bi bi-file-medical"></i></span>
+                                                <textarea name="antecedentes-personales" id="antecedentes-personales"
+                                                    class="form-control" rows="3"
+                                                    placeholder="Ingrese Antecedentes Personales">{{ old('antecedentes-personales') }}</textarea>
+                                            </div>
+                                            @error('antecedentes-personales')
+                                            <small class="text-danger">{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="alergias" class="form-label">Alergias</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text"><i
+                                                        class="bi bi-exclamation-triangle"></i></span>
+                                                <textarea name="alergias" id="alergias" class="form-control" rows="3"
+                                                    placeholder="Ingrese Alergias">{{ old('alergias') }}</textarea>
+                                            </div>
+                                            @error('alergias')
+                                            <small class="text-danger">{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="antecedentes_familiares" class="form-label">
+                                                Antecedentes Familiares</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text"><i class="bi bi-people"></i></span>
+                                                <textarea name="antecedentes-familiares" id="antecedentes-familiares"
+                                                    class="form-control" rows="3"
+                                                    placeholder="Ingrese Antecedentes Familiares">{{ old('antecedentes-familiares') }}</textarea>
+                                            </div>
+                                            @error('antecedentes-familiares')
+                                            <small class="text-danger">{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" hidden>
 
                                     <div class="col-md-3">
                                         <div class="form-group">
@@ -459,75 +534,7 @@
                                             @enderror
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="medicamentos" class="form-label">Productos que usa</label>
-                                            <div class="input-group">
-                                                <span class="input-group-text"><i class="bi bi-capsule"></i></span>
-                                                <textarea name="medicamentos" id="medicamentos" class="form-control"
-                                                    rows="3"
-                                                    placeholder="Ingrese Productos que usa">{{ old('medicamentos') }}</textarea>
-                                            </div>
-                                            @error('medicamentos')
-                                            <small class="text-danger">{{ $message }}</small>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="antecedentes_personales" class="form-label">
-                                                Antecedentes de Procesos Químicos
-                                            </label>
-                                            <div class="input-group">
-                                                <span class="input-group-text"><i class="bi bi-file-medical"></i></span>
-                                                <textarea name="antecedentes-personales" id="antecedentes-personales"
-                                                    class="form-control" rows="3"
-                                                    placeholder="Antecedentes de Procesos Químicos">{{ old('antecedentes-personales') }}</textarea>
-                                            </div>
-                                            @error('antecedentes-personales')
-                                            <small class="text-danger">{{ $message }}</small>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="alergias" class="form-label">Alegias</label>
-                                            <div class="input-group">
-                                                <span class="input-group-text"><i
-                                                        class="bi bi-exclamation-triangle"></i></span>
-                                                <textarea name="alergias" id="alergias" class="form-control" rows="3"
-                                                    placeholder="Ingrese Medicamentos">{{ old('alergias') }}</textarea>
-                                            </div>
-                                            @error('alergias')
-                                            <small class="text-danger">{{ $message }}</small>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="antecedentes_familiares" class="form-label">
-                                                Historia Capilar</label>
-                                            <div class="input-group">
-                                                <span class="input-group-text"><i class="bi bi-people"></i></span>
-                                                <textarea name="antecedentes-familiares" id="antecedentes-familiares"
-                                                    class="form-control" rows="3"
-                                                    placeholder="Historia capilar">{{ old('antecedentes-familiares') }}</textarea>
-                                            </div>
-                                            @error('antecedentes-familiares')
-                                            <small class="text-danger">{{ $message }}</small>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="comentario_1" class="form-label">Tipo de Cabello</label>
                                             <div class="input-group">
@@ -543,7 +550,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="comentario_2" class="form-label">
                                                 Procesos Químicos Realizados</label>
@@ -558,7 +565,7 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="comentario_3" class="form-label">
                                                 Observaciones</label>
@@ -566,7 +573,7 @@
                                                 <span class="input-group-text"><i class="bi bi-people"></i></span>
                                                 <textarea name="comentario_3" id="comentario_3" class="form-control"
                                                     rows="3"
-                                                    placeholder="Ingrese Comentarios">{{ old('comentario_2') }}</textarea>
+                                                    placeholder="Ingrese Comentarios">{{ old('comentario_3') }}</textarea>
                                             </div>
                                             @error('comentario_3')
                                             <small class="text-danger">{{ $message }}</small>
@@ -580,7 +587,7 @@
                                             <button class="accordion-button" type="button" data-bs-toggle="collapse"
                                                 data-bs-target="#collapseOne" aria-expanded="true"
                                                 aria-controls="collapseOne">
-                                                <h6>Insumos Utilizados</h6>
+                                                <h6>Examenes</h6>
                                             </button>
                                         </h2>
                                         <div id="collapseOne" class="accordion-collapse collapse show"
@@ -637,8 +644,8 @@
                                                                 <span class="input-group-text"><i
                                                                         class="bi bi-currency-dollar"></i></span>
                                                                 <input type="number" step="0.01" class="form-control"
-                                                                    id="precio" name="precio" placeholder="Precio" oninput="onChangePrecioFraccion()"
-                                                                    disabled>
+                                                                    id="precio" name="precio" placeholder="Precio"
+                                                                    oninput="onChangePrecioFraccion()" disabled>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -717,34 +724,35 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="accordion-item" hidden>
+                                    <div class="accordion-item">
                                         <h2 class="accordion-header" id="headingTwo">
                                             <button class="accordion-button collapsed" type="button"
                                                 data-bs-toggle="collapse" data-bs-target="#collapseTwo"
                                                 aria-expanded="false" aria-controls="collapseTwo">
-                                                Comentario 2
+                                                <h6>Orden de Examen-Seccion 1</h6>
                                             </button>
                                         </h2>
                                         <div id="collapseTwo" class="accordion-collapse collapse"
                                             aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                                             <div class="accordion-body">
-
-
+                                                <div id="id-pagina-1">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="accordion-item" hidden>
+                                    <div class="accordion-item">
                                         <h2 class="accordion-header" id="headingThree">
                                             <button class="accordion-button collapsed" type="button"
                                                 data-bs-toggle="collapse" data-bs-target="#collapseThree"
                                                 aria-expanded="false" aria-controls="collapseThree">
-                                                Comentario 3
+                                                <h6>Orden de Examen-Seccion 2</h6>
                                             </button>
                                         </h2>
                                         <div id="collapseThree" class="accordion-collapse collapse"
                                             aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                                             <div class="accordion-body">
-
+                                                <div id="id-pagina-2">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -837,7 +845,7 @@
                                                     <div class="card">
 
                                                         <div class="card-header">
-                                                            <h4>Imágenes de la Atención
+                                                            <h4>Imágenes de la Orden
                                                                 <div style="float: right;">
                                                                     <button type="button" class="btn btn-primary"
                                                                         onclick="mostrarModalImagen()">
@@ -897,7 +905,7 @@
                                             <span class="input-group-text"><i
                                                     class="bi bi-person-badge-fill"></i></span>
                                             <input type="text" id="search-citas" name="search-citas"
-                                                class="form-control" placeholder="Buscar atención...">
+                                                class="form-control" placeholder="Buscar Orden...">
                                             <button id="btn-buscar-citas" type="button" class="btn btn-primary"
                                                 onclick="cargar_citas()">
                                                 <i class="bi bi-search"></i>Buscar</button>
@@ -920,14 +928,14 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>ID Atención</th>
+                                    <th>Orden</th>
                                     <th>Fecha</th>
-                                    <th>Tipo Atención</th>
-                                    <th>Productos que usa</th>
-                                    <th>Historia Capilar</th>
+                                    <th>Tipo Orden</th>
+                                    <th>Medicacion Continua</th>
+                                    <th>Antecedentes Personales</th>
                                     <th>Alergias</th>
-                                    <th>Antecedentes de Procesos Químicos</th>
-                                    <th>Tiene Caídas</th>
+                                    <th>Antecedentes Familiares</th>
+
                                     <th class="text-center">Acciones</th>
                                 </tr>
                             </thead>
@@ -965,6 +973,355 @@
 
 @push('scripts')
 <script>
+
+    function reporte_orden_pdf() {
+        const idComprobanteElem = document.getElementById('id-consulta');
+        const id_comprobante = idComprobanteElem ? idComprobanteElem.value || '0' : '0';
+
+        if (!id_comprobante || id_comprobante === '0') {
+            alert('La orden debe estar registrada para generar el PDF.');
+            return;
+        }
+
+        // Spinner
+        const btnReporte = document.querySelector('.btn-reporte');
+        if (btnReporte) {
+            btnReporte.disabled = true;
+            btnReporte.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Generando...';
+        }
+
+
+
+        fetch("{{ route('admin.consultas.reporteordenpdf') }}", {
+            method: "POST",
+            headers: {
+                "X-CSRF-TOKEN": '{{ csrf_token() }}',
+                "Accept": "application/pdf",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ id: id_comprobante })
+        })
+            .then(response => {
+                if (!response.ok) throw new Error('Error en el servidor');
+                return response.blob();
+            })
+            .then(blob => {
+                // 1. Crear el objeto con el tipo MIME correcto
+                const file = new Blob([blob], { type: 'application/pdf' });
+                const url = window.URL.createObjectURL(file);
+
+                // 2. Crear un nombre descriptivo
+                const nombreArchivo = `orden-${id_comprobante}.pdf`;
+
+                // --- OPCIÓN: DESCARGA DIRECTA (Soluciona el error de conexión) ---
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = nombreArchivo; // AQUÍ SE ASIGNA EL NOMBRE
+                document.body.appendChild(a);
+                a.click();
+
+                // 3. IMPORTANTE: No borrar el objeto inmediatamente
+                // Le damos 10 segundos para que el navegador termine de procesar la descarga
+                setTimeout(() => {
+                    document.body.removeChild(a);
+                    window.URL.revokeObjectURL(url);
+                }, 10000);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error al generar el PDF.');
+            })
+            .finally(() => {
+                if (btnReporte) {
+                    btnReporte.disabled = false;
+
+                    btnReporte.innerHTML = '<i class="bi-file-earmark-pdf""></i> PDF';
+                }
+            });
+    }
+
+    function seleccionarProducto(productoId, nombre, chequeado) {
+        if (!chequeado) {
+            eliminarInsumoPorId(productoId);
+            return;
+        }
+
+        const productoSelect = document.getElementById('id-productos-insumos');
+
+        // Seleccionar el producto en el combo
+        productoSelect.value = productoId;
+
+        // Disparar el change por si tienes eventos asociados
+        productoSelect.dispatchEvent(new Event('change'));
+
+        // Asignar valores por defecto
+        document.getElementById('cantidad').value = 1;
+        document.getElementById('precio').value = 1;
+        document.getElementById('precio_fraccion').value = 1;
+
+        // alert(
+        //     'Producto: ' + productoId +
+        //     '\nChequeado: ' + chequeado
+        // );
+        agregarInsumo();
+    }
+    async function cargarProductosparaExamenes() {
+        const seccion_pagina_1 = document.getElementById('id-pagina-1');
+        // Validar que los elementos existan
+        // Agregar clase form-control si no la tiene
+        // Mostrar loading
+        seccion_pagina_1.innerHTML = '<div class="text-center py-3">Cargando...</div>';
+        let url = `/admin/productos/productos-list-examenes`;
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const result = await response.json();
+            //   console.log('Respuesta de la API de examenes:', result);
+            //console.log('Datos recibidos:', result);
+            // Limpiar selects antes de llenar
+            let html = '';
+            let filaActual = null;
+            let colActual = null;
+            if (result.categorias && result.categorias.length > 0) {
+                result.categorias.forEach(categoria => {
+                    // Cambió la fila
+                    if (filaActual !== categoria.fila) {
+                        if (filaActual !== null) {
+                            if (colActual !== null) {
+                                html += '</div>'; // cierra col-md-4
+                            }
+                            html += '</div>'; // cierra row
+                        }
+                        html += '<div class="row">';
+                        filaActual = categoria.fila;
+                        colActual = null;
+                    }
+                    // Cambió la columna
+                    if (colActual !== categoria.col) {
+                        if (colActual !== null) {
+                            html += '</div>'; // cierra col-md-4 anterior
+                        }
+                        html += `<div class="col-md-${categoria.ancho_col}">`;
+                        colActual = categoria.col;
+                    }
+                    html += `
+            <div class="col-md-12 mb-2">
+                <div class="card">
+                       <div class="alert alert-primary">${categoria.nombre}</div>
+                    <div class="row">
+        `;
+                    let colActualProducto = null;
+                    (categoria.productos || []).forEach(producto => {
+                        if (colActualProducto !== producto.col) {
+                            if (colActualProducto !== null) {
+                                html += '</div>'; // cierra col-md-4 anterior
+                            }
+                            html += `<div class="col-md-${producto.ancho_col}">`;
+                            colActualProducto = producto.col;
+                        }
+                        html += `
+                <div class="form-check mb-1">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="producto_${producto.id}"
+                        value="${producto.id}"
+            onclick="seleccionarProducto(${producto.id}, '${producto.nombre}', this.checked)">
+                    <label
+                        class="form-check-label"
+                        for="producto_${producto.id}">
+                        ${producto.nombre}
+                    </label>
+                </div>
+            `;
+                    });
+                                       if (colActualProducto !== null) {
+                        html += '</div>';
+                    }
+
+                    html += `
+        </div>
+    </div>
+</div>
+`;
+                });
+                // cerrar último col y row
+                if (filaActual !== null) {
+                    if (colActual !== null) {
+                        html += '</div>';
+                    }
+                    html += '</div>';
+                }
+                //console.log('HTML generado para productos de examenes:', html);
+                document.getElementById('id-pagina-1').innerHTML = html;
+            }
+            return;
+        } catch (err) {
+            console.error('Error al cargar insumos:', err);
+            lista_insumos.innerHTML = '<option value="">Error al cargar los códigos</option>';
+
+        }
+    }
+
+
+    async function cargarProductosparaExamenes_seccion_2() {
+        const seccion_pagina_2 = document.getElementById('id-pagina-2');
+        // Validar que los elementos existan
+        // Agregar clase form-control si no la tiene
+        // Mostrar loading
+        seccion_pagina_2.innerHTML = '<div class="text-center py-3">Cargando...</div>';
+        let url = `/admin/productos/productos-list-examenes`;
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const result = await response.json();
+            console.log('Respuesta de la API de examenes pagina 2:', result);
+            //console.log('Datos recibidos:', result);
+            // Limpiar selects antes de llenar
+            let html = '';
+            let filaActual = null;
+            let colActual = null;
+            let col2Actual = null;
+            let rowInternoAbierto = false;
+
+            if (result.categorias2 && result.categorias2.length > 0) {
+                result.categorias2.forEach(categoria => {
+                    // Cambió la fila
+                    if (filaActual !== categoria.fila) {
+                        if (filaActual !== null) {
+                            if (colActual !== null) {
+                                html += '</div>'; // cierra col-md-4
+                            }
+                            html += '</div>'; // cierra row
+                        }
+                        html += '<div class="row">';
+                        filaActual = categoria.fila;
+                        colActual = null;
+                    }
+                    // Cambió la columna
+                    if (colActual !== categoria.col) {
+
+                        // cerrar row interno anterior
+                        if (rowInternoAbierto) {
+
+                            if (col2Actual !== null) {
+                                html += '</div>'; // cierra col2
+                            }
+
+                            html += '</div>'; // cierra row interno
+
+                            rowInternoAbierto = false;
+                            col2Actual = null;
+                        }
+
+                        if (colActual !== null) {
+                            html += '</div>'; // cierra col principal
+                        }
+
+                        html += `<div class="col-md-${categoria.ancho_col}">`;
+
+                        colActual = categoria.col;
+                    }
+                    if (categoria.col2 > 0) {
+
+                        if (!rowInternoAbierto) {
+
+                            html += '<div class="row">';
+                            rowInternoAbierto = true;
+                        }
+
+                        if (col2Actual !== categoria.col2) {
+
+                            if (col2Actual !== null) {
+                                html += '</div>'; // cierra col2 anterior
+                            }
+
+                            html += `<div class="col-md-${categoria.ancho_col}">`;
+
+                            col2Actual = categoria.col2;
+                        }
+                    }
+
+
+                    html += `
+            <div class="col-md-12 mb-2">
+                <div class="card">
+                       <div class="alert alert-primary">${categoria.nombre}</div>
+                    <div class="row">
+        `;
+                    let colActualProducto = null;
+                    (categoria.productos || []).forEach(producto => {
+                        if (colActualProducto !== producto.col) {
+                            if (colActualProducto !== null) {
+                                html += '</div>'; // cierra col-md-4 anterior
+                            }
+                            html += `<div class="col-md-${producto.ancho_col}">`;
+                            colActualProducto = producto.col;
+                        }
+                        html += `
+                <div class="form-check mb-1">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="producto_${producto.id}"
+                        value="${producto.id}"
+            onclick="seleccionarProducto(${producto.id}, '${producto.nombre}', this.checked)">
+                    <label
+                        class="form-check-label"
+                        for="producto_${producto.id}">
+                        ${producto.nombre}
+                    </label>
+                </div>
+            `;
+                    });
+                    if (colActualProducto !== null) {
+                        html += '</div>';
+                    }
+
+                    html += `
+        </div>
+    </div>
+</div>
+`;
+                });
+
+                if (rowInternoAbierto) {
+
+                    if (col2Actual !== null) {
+                        html += '</div>';
+                    }
+
+                    html += '</div>';
+                }
+
+                if (colActual !== null) {
+                    html += '</div>';
+                }
+
+                // if (col2Actual !== null) {
+                //     html += '</div>';
+                // }
+                // // cerrar último col y row
+                // if (filaActual !== null) {
+                //     if (colActual !== null) {
+                //         html += '</div>';
+                //     }
+                //     html += '</div>';
+                // }
+                console.log('HTML generado para productos de examenes pagina 2:', html);
+                document.getElementById('id-pagina-2').innerHTML = html;
+            }
+            return;
+        } catch (err) {
+            console.error('Error al cargar insumos:', err);
+
+
+        }
+    }
 
     function reporte_ficha_pdf() {
         const id_paciente = document.getElementById('id-paciente').value || '0';
@@ -1236,8 +1593,8 @@
         const cantidad_por_unidad = productoSelect.options[productoSelect.selectedIndex]?.getAttribute('data-cantidad-por-unidad') || '';
 
 
-            const tipo_producto = productoSelect.options[productoSelect.selectedIndex]?.getAttribute('data-tipo-producto') || '';
-        
+        const tipo_producto = productoSelect.options[productoSelect.selectedIndex]?.getAttribute('data-tipo-producto') || '';
+
 
         // Habilitar el input de precio
 
@@ -1284,7 +1641,7 @@
             }
 
             const result = await response.json();
-            console.log('Respuesta de la API de insumos:', result);
+            //   console.log('Respuesta de la API de insumos:', result);
             //console.log('Datos recibidos:', result);
 
             // Limpiar selects antes de llenar
@@ -1373,24 +1730,24 @@
 
     function onChangePrecioFraccion() {
         const precio = parseFloat(document.getElementById('precio').value) || 0;
-        document.getElementById('precio_fraccion').value = precio.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });  
+        document.getElementById('precio_fraccion').value = precio.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
     }
     function agregarInsumo() {
         const productoSelect = document.getElementById('id-productos-insumos');
         const producto = productoSelect.value;
         const nombre = productoSelect.options[productoSelect.selectedIndex]?.getAttribute('data-nombre') || '';
-       
-         const tipo_producto = productoSelect.options[productoSelect.selectedIndex]?.getAttribute('data-tipo-producto') || '';
+
+        const tipo_producto = productoSelect.options[productoSelect.selectedIndex]?.getAttribute('data-tipo-producto') || '';
         const cantidad = document.getElementById('cantidad').value;
         const unidad_medida = productoSelect.options[productoSelect.selectedIndex]?.getAttribute('data-unidad-medida') || '';
-      //  const precio = productoSelect.options[productoSelect.selectedIndex]?.getAttribute('data-precio') || '';
+        //  const precio = productoSelect.options[productoSelect.selectedIndex]?.getAttribute('data-precio') || '';
         const precio = document.getElementById('precio').value;
-            let precio_fraccion = document.getElementById('precio_fraccion').value;
-            // alert(`Tipo de producto seleccionado v2: ${tipo_producto} nombre de producto ${nombre}` );
-            // if (tipo_producto === 'S') {
-            //     precio_fraccion = precio;
-            // }
+        let precio_fraccion = document.getElementById('precio_fraccion').value;
+        // alert(`Tipo de producto seleccionado v2: ${tipo_producto} nombre de producto ${nombre}` );
+        // if (tipo_producto === 'S') {
+        //     precio_fraccion = precio;
+        // }
 
         if (!producto || !nombre || !cantidad || !unidad_medida || !precio) {
             alert('Complete todos los campos de insumo.');
@@ -1424,6 +1781,7 @@
 
     // Renderiza la tabla de insumos desde el array
     function renderizarInsumos() {
+        // console.log('renderizarInsumos:', insumosDetalle);
         const tbody = document.getElementById('insumos-detalle-tbody');
         tbody.innerHTML = '';
         insumosDetalle.forEach((insumo, idx) => {
@@ -1495,6 +1853,27 @@
         renderizarInsumos();
     }
 
+    function eliminarInsumoPorId(id) {
+
+
+        const idx = insumosDetalle.findIndex(
+            item => item.producto_id == id
+        );
+
+
+        if (idx !== -1) {
+
+
+
+            insumosDetalle.splice(idx, 1);
+
+
+
+            renderizarInsumos();
+
+
+        }
+    }
     function totalizar() {
         let total = 0;
         insumosDetalle.forEach(insumo => {
@@ -1782,6 +2161,8 @@
         cargarProductosInsumos();
         cargar_citas();
         consultar_fotos_paciente();
+        cargarProductosparaExamenes();
+        cargarProductosparaExamenes_seccion_2();
     });
 
     async function cargar_citas(page = 1) {
@@ -1810,7 +2191,7 @@
             const response = await fetch(url);
             const result = await response.json();
             tbody.innerHTML = '';
-            console.log('Resultado de la carga de citas:', result);
+            // console.log('Resultado de la carga de citas:', result);
             if (result.data && result.data.length > 0) {
                 result.data.forEach((consulta, idx) => {
                     const tr = document.createElement('tr');
@@ -1823,7 +2204,7 @@
                         <td>${consulta.antecedentes_familiares ?? ''}</td>
                         <td>${consulta.alergias ?? ''}</td>
                         <td>${consulta.antecedentes_personales ?? ''}</td>
-                        <td>${consulta.comentario_4 ?? ''}</td>
+
                         <td class="text-center">
                             <button class="btn btn-sm btn-success" type="button" onclick="document.getElementById('id-consulta').value='${consulta.id}'; consultar_cita();">
                                 <i class="bi bi-pencil"></i>
@@ -1878,13 +2259,13 @@
         const idConsulta = document.getElementById('id-consulta').value || '0';
         const accion = idConsulta === '0' ? 'I' : 'M';
         const idPaciente = document.getElementById('id-paciente').value;
-        console.log('Insumos detalle a enviar:', insumosDetalle);
+        //    console.log('Insumos detalle a enviar:', insumosDetalle);
 
-        const comentario_4 = document.getElementById('comentario_4').value;
+        let comentario_4 = document.getElementById('comentario_4').value;
         if (comentario_4 === null || comentario_4 === undefined || comentario_4 === '') {
-            alert('Debe seleccionar si tiene caídas de cabello');
-            return;
+            comentario_4 = ' ';
         }
+        console.log('Comentario 4 antes de enviar:', insumosDetalle);
 
         const data = {
             accion: accion,
@@ -2097,8 +2478,8 @@
                     } else {
                         insumosDetalle = [];
                     }
-                    console.log('Insumos detalle cargados:', insumosDetalle);
-                    console.log('Insumos detalle cargados (JSON):', JSON.stringify(insumosDetalle));
+                    //  console.log('Insumos detalle cargados:', insumosDetalle);
+                    //  console.log('Insumos detalle cargados (JSON):', JSON.stringify(insumosDetalle));
                     renderizarInsumos();
 
                     // Cambiar el tab actual a "paciente-consulta"

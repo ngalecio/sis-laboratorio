@@ -51,12 +51,12 @@
                                     <a href="{{ url('/admin/categorias/'.$categoria->id) }}"
                                         class="btn btn-sm btn-info ">
 
-                                        <i class="bi bi-eye"></i>Ver
+                                        <i class="bi bi-eye"></i>
                                     </a>
                                     <a href="{{ url('/admin/categorias/'.$categoria->id.'/edit') }}"
                                         class="btn btn-sm btn-success "><i
                                             class="bi bi-pencil"></i>
-                                        Editar
+                                        
                                     </a>
 
                                     <form action="{{ url('/admin/categorias/delete/'.$categoria->id) }}" method="POST"
@@ -65,7 +65,7 @@
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger "
                                             onclick="preguntar({{$categoria->id}}, event);">
-                                            <i class="bi bi-trash"></i>Eliminar</button>
+                                            <i class="bi bi-trash"></i></button>
                                     </form>
                                     <script>
                                         function preguntar(id, event) {

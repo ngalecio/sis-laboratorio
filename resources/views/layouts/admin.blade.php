@@ -6,7 +6,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
     <link rel="shortcut icon" href="./assets/compiled/svg/favicon.svg" type="image/x-icon">
     <link rel="shortcut icon"
-        href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAiCAYAAADRcLDBAAAEs2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNS41LjAiPgogPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgeG1sbnM6ZXhpZj0iaHR0cDovL25zLmFkb2JlLmNvbS9leGlmLzEuMC8iCiAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyIKICAgIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIKICAgIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIKICAgIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIgogICAgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIKICAgZXhpZjpQaXhlbFhEaW1lbnNpb249IjMzIgogICBleGlmOlBpeGVsWURpbWVuc2lvbj0iMzQiCiAgIGV4aWY6Q29sb3JTcGFjZT0iMSIKICAgdGlmZjpJbWFnZVdpZHRoPSIzMyIKICAgdGlmZjpJbWFnZUxlbmd0aD0iMzQiCiAgIHRpZmY6UmVzb2x1dGlvblVuaXQ9IjIiCiAgIHRpZmY6WFJlc29sdXRpb249Ijk2LjAiCiAgIHRpZmY6WVJlc29sdXRpb249Ijk2LjAiCiAgIHBob3Rvc2hvcDpDb2xvck1vZGU9IjMiCiAgIHBob3Rvc2hvcDpJQ0NQcm9maWxlPSJzUkdCIElFQzYxOTY2LTIuMSIKICAgeG1wOk1vZGlmeURhdGU9IjIwMjItMDMtMzFUMTA6NTA6MjMrMDI6MDAiCiAgIHhtcDpNZXRhZGF0YURhdGU9IjIwMjItMDMtMzFUMTA6NTA6MjMrMDI6MDAiPgogICA8eG1wTU06SGlzdG9yeT4KICAgIDxyZGY6U2VxPgogICAgIDxyZGY6bGkKICAgICAgc3RFdnQ6YWN0aW9uPSJwcm9kdWNlZCIKICAgICAgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWZmaW5pdHkgRGVzaWduZXIgMS4xMC4xIgogICAgICBzdEV2dDp3aGVuPSIyMDIyLTAzLTMxVDEwOjUwOjIzKzAyOjAwIi8+CiAgICA8L3JkZjpTZXE+CiAgIDwveG1wTU06SGlzdG9yeT4KICA8L3JkZjpEZXNjcmlwdGlvbj4KIDwvcmRmOlJERj4KPC94OnhtcG1ldGE+Cjw/eHBhY2tldCBlbmQ9InIiPz5V57uAAAABgmlDQ1BzUkdCIElFQzYxOTY2LTIuMQAAKJF1kc8rRFEUxz9maORHo1hYKC9hISNGTWwsRn4VFmOUX5uZZ36oeTOv954kW2WrKLHxa8FfwFZZK0WkZClrYoOe87ypmWTO7dzzud97z+nec8ETzaiaWd4NWtYyIiNhZWZ2TvE946WZSjqoj6mmPjE1HKWkfdxR5sSbgFOr9Ll/rXoxYapQVik8oOqGJTwqPL5i6Q5vCzeo6dii8KlwpyEXFL519LjLLw6nXP5y2IhGBsFTJ6ykijhexGra0ITl5bRqmWU1fx/nJTWJ7PSUxBbxJkwijBBGYYwhBgnRQ7/MIQIE6ZIVJfK7f/MnyUmuKrPOKgZLpEhj0SnqslRPSEyKnpCRYdXp/9++msneoFu9JgwVT7b91ga+LfjetO3PQ9v+PgLvI1xkC/m5A+h7F32zoLXug38dzi4LWnwHzjeg8UGPGbFfySvuSSbh9QRqZ6H+Gqrm3Z7l9zm+h+iafNUV7O5Bu5z3L/wAdthn7QIme0YAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAJTSURBVFiF7Zi9axRBGIefEw2IdxFBRQsLWUTBaywSK4ubdSGVIY1Y6HZql8ZKCGIqwX/AYLmCgVQKfiDn7jZeEQMWfsSAHAiKqPiB5mIgELWYOW5vzc3O7niHhT/YZvY37/swM/vOzJbIqVq9uQ04CYwCI8AhYAlYAB4Dc7HnrOSJWcoJcBS4ARzQ2F4BZ2LPmTeNuykHwEWgkQGAet9QfiMZjUSt3hwD7psGTWgs9pwH1hC1enMYeA7sKwDxBqjGnvNdZzKZjqmCAKh+U1kmEwi3IEBbIsugnY5avTkEtIAtFhBrQCX2nLVehqyRqFoCAAwBh3WGLAhbgCRIYYinwLolwLqKUwwi9pxV4KUlxKKKUwxC6ZElRCPLYAJxGfhSEOCz6m8HEXvOB2CyIMSk6m8HoXQTmMkJcA2YNTHm3congOvATo3tE3A29pxbpnFzQSiQPcB55IFmFNgFfEQeahaAGZMpsIJIAZWAHcDX2HN+2cT6r39GxmvC9aPNwH5gO1BOPFuBVWAZue0vA9+A12EgjPadnhCuH1WAE8ivYAQ4ohKaagV4gvxi5oG7YSA2vApsCOH60WngKrA3R9IsvQUuhIGY00K4flQG7gHH/mLytB4C42EgfrQb0mV7us8AAMeBS8mGNMR4nwHamtBB7B4QRNdaS0M8GxDEog7iyoAguvJ0QYSBuAOcAt71Kfl7wA8DcTvZ2KtOlJEr+ByyQtqqhTyHTIeB+ONeqi3brh+VgIN0fohUgWGggizZFTplu12yW8iy/YLOGWMpDMTPXnl+Az9vj2HERYqPAAAAAElFTkSuQmCC"
+        href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAACo1BMVEX////9/v684ee74Ofp9few2+Oc0tsdma0gm6/T6+/h8vROr78Gj6UFjqUAjKM2pLbf8PNNr78CjaQOkqi64OYSlKnM6O1xv8z1+/xuvsvx+fr3+/xetsXc7/Lw+Prt9/k0pLbS6+9PsMB1wc34/P2Z0dra7vIQk6my3OP5/P1IrL2BxtLi8vU0o7ZDqrvv+Pn9/v/+///3/Pys2eELkacKkKav2+L6/f656PJszuPU8Pfr9vj8/v7z+ftLrr5ft8X8/f6o4u4TsNIKrdDC6/Py+fovobSPzdf7/f2e09wDjaQqn7Ln9Pbx+vw/v9oAqs7J5+sPk6knnrHl8/bQ6u4UlaoPk6jI5uvi9fknt9YJrdDE6/Tj8vU7prgMkadbtcT0+vvq9vguobMEjqSo2OD0+/yr4Oqf3Oei3OjR7PHg8fTC4+ml1t7k8/X7/f71+vs9qLnq9fdCqrsfmq49p7n6/f1svcpmusjo9fcrn7IDjqSn19/0+/3C5+5Ws8IRlKkKkKcHj6YBjaMJkKZTssHe8PPN6O0TlKoNkqjG5erh9flLw9yS2eim2+W44OeRztgIj6YXlqup2ODL5+yX0NomnbHg9fkftNQFrM8jttXJ7fUKkaei1d3G5evq+PsuudctoLOw2+Kh1N0Rk6mC1ecGrM9+xdA6prg1pLaOzNbL6Ozw+vx91OYzu9jJ5+wzo7V8xNBluced09z2+/xqvMllusfp+Pv4/f74/PxnushctsTz+vtKrb4BjKNAqbq33+W74OY/qLrf8fTY7fFFq7xVssKk1t7X7fDZ7vGq2eBdtsTS6u/i8vQEjqUZl6w2pbcbmK1juMea0ts8p7n1+/vm9PZQsMAgmq4onrFctcSm19/s9vi03eSQzdeLy9WY0dq+4uisPBg1AAACIklEQVQ4y32TZ1sTQRSFTzRi2xxlI2hQIworBpEExY6CJFHEgoq9IHZNjMQgii2U2LD3QmxYsaJix14QNfbe0J/iBwHZ6HK+zbzvM3PvPHcAxajq1VcpU6gbBDRs1FiZN2kqaNisuTIPFElti7o5g4Lr5kLLVnVzXYgCb93mD2+rVxDahZIUdO07hIUrPJCkpaDrGChGdFI4whAQ2TkkqgsZbfyHmUwAENNVBXSLZfcefrhnr959YOgbBwDo15+MT5ALAxLNFmvYwEFJAIDByRwyVMaHDU8xW0aM5KhUAMDoMRw7TiaMnzAxcdLkKWlT0wEA06ZzxkyZMGv2nLnzbPb5wTabzbEAGU5SkgkLXZk1camRvshfyFossirikixkL+Wy5TJhxUp3Tm4eme/JWbUaWLOW6wpkwvoNGzdt3rKV27bvsALYKXKXQybs3rN3X6Hdy0wbAFgjSXcWAPV+SZIk6UAMDh5KMVvsXh5WA0BRGoUjAFB0VCCpcRtgOnbcbLF7NSdUAKJOksXZAGAtOBVLFp8GcObsucLzJReMAPQXRXouVd1delmkcMUBIO7qtevZcQBSbwgUb5ZVV+e4dZvinbul1evwe9Eief/B3/ofPhLJiMflT4wZGfqKp8+CSNH1vHaHvngPyRcvQ53OV68FkrFvfPJRKHtbomFN8t6Vv/cftpgP0sdPuflksvbzl6/f/v8hKr7/qKz8+cuXVGvzN3L9jqc5Y06VAAAAAElFTkSuQmCC"
         type="image/png">
     <link rel="stylesheet" href="{{ asset('./assets/compiled/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('./assets/compiled/css/app-dark.css') }}">
@@ -206,13 +206,13 @@
 
                             <a href="#" class='sidebar-link'>
                                 <i class="bi bi-collection-fill"></i>
-                                <span>Salon</span>
+                                <span>Atenciones</span>
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item">
                                     <a href="{{url('/admin/pacientes')}}" class='submenu-link'>
                                         <i class="bi bi-person-circle"></i>
-                                        <span>Clientes</span>
+                                        <span>Pacientes</span>
                                     </a>
                                 </li>
                                 <!-- <li class="submenu-item">
@@ -231,7 +231,7 @@
                                 <li class="submenu-item">
                                     <a href="{{url('/admin/consultas')}}" class='submenu-link'>
                                         <i class="bi bi-person-hearts"></i>
-                                        <span>Atenciones</span>
+                                        <span>Ordenes</span>
                                     </a>
                                 </li>
 

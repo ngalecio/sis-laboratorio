@@ -70,7 +70,7 @@
                 <tr>
                     <th colspan="8"
                         style="text-align:left; font-size:13px; font-weight:bold; color:#2d2d2d; letter-spacing:1px; padding-top:5px; background:#fff;">
-                        Atenciones Registradas
+                        Ordenes de Laboratorio
                     </th>
                     <th colspan="2"
                         style="text-align:right; font-size:9px; color:#666; padding-top:5px; background:#fff;">

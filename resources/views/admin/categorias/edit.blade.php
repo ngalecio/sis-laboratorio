@@ -62,6 +62,81 @@
                         </div>
 
                     </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="pagina">Pagina</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-file-earmark-text-fill"></i></span>
+                                    <input type="text" name="pagina" id="pagina" value="{{ old('pagina', $categoria->pagina) }}"
+                                        class="form-control" placeholder="Ingrese la página">
+                                </div>
+                                @error('pagina')
+                                <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="fila">Fila</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-list-ol"></i></span>
+                                    <input type="text" name="fila" id="fila" value="{{ old('fila', $categoria->fila) }}"
+                                        class="form-control" placeholder="Ingrese la fila">
+                                </div>
+                                @error('fila')
+                                <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="col">Columna</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-columns-gap"></i></span>
+                                    <input type="text" name="col" id="col" value="{{ old('col', $categoria->col) }}"
+                                        class="form-control" placeholder="Ingrese la columna">
+                                </div>
+                                @error('col')
+                                <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="col2">Columna 2</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-columns-gap"></i></span>
+                                    <input type="text" name="col2" id="col2" value="{{ old('col2', $categoria->col2) }}"
+                                        class="form-control" placeholder="Ingrese la columna 2">
+                                </div>
+                                @error('col2')
+                                <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="orden">Orden</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-sort-numeric-down"></i></span>
+                                    <input type="text" name="orden" id="orden" value="{{ old('orden', $categoria->orden) }}"
+                                        class="form-control" placeholder="Ingrese el orden">
+                                </div>
+                                @error('orden')
+                                <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
                     <br>
                     <div class="row">
                         <div class="col-md-12">

@@ -25,14 +25,29 @@ class PacienteController extends Controller
     {
      
         $buscar = $request->get('search');
-        $query = Paciente::query();
+        $query = Paciente::with('usuario:id,name')->select(
+            'id',
+            'nombres',
+            'apellidos',
+            'cedula',
+            'direccion',
+            'telefono',
+            'email',
+            'fecha_nacimiento',
+            'tipo_identificacion',
+            'usuario_creacion_id'
+        );
+        
         if ($buscar) {
-            $query->where('nombres', 'like', '%' . $buscar . '%')
-                ->orWhere('apellidos', 'like', '%' . $buscar . '%')
-                ->orWhere('cedula', 'like', '%' . $buscar . '%')
-                ->orWhere('direccion', 'like', '%' . $buscar . '%')
-            ;
+            $query->where(function ($q) use ($buscar) {
+                $q->where('nombres', 'like', '%' . $buscar . '%')
+                    ->orWhere('apellidos', 'like', '%' . $buscar . '%')
+                    ->orWhere('cedula', 'like', '%' . $buscar . '%')
+                    ->orWhere('direccion', 'like', '%' . $buscar . '%');
+            });
         }
+
+        $query->where('usuario_creacion_id', auth()->id())->orderBy('apellidos');
 
 
 

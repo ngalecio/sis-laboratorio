@@ -46,12 +46,22 @@ class CategoriaController extends Controller
             'nombre' => 'required|string|max:255',
             'slug' => 'nullable|string|max:255',
             'descripcion' => 'nullable|string',
+            'pagina' => 'nullable|string|max:255',
+            'fila' => 'nullable|string|max:255',
+            'col' => 'nullable|string|max:255',
+            'col2' => 'nullable|string|max:255',
+            'orden' => 'nullable|string|max:255',
         ]);
 
         $categoria = new Categoria();
         $categoria->nombre = $request->nombre;
         $categoria->slug = Str::slug($request->nombre);
         $categoria->descripcion = $request->descripcion;
+        $categoria->pagina = $request->pagina;
+        $categoria->fila = $request->fila;
+        $categoria->col = $request->col;
+        $categoria->col2 = $request->col2;
+        $categoria->orden = $request->orden;
         $categoria->save();
         return redirect()->route('admin.categorias.index')
             ->with('mensaje', 'Categoria creada exitosamente.')
@@ -89,12 +99,22 @@ class CategoriaController extends Controller
             'nombre' => 'required|string|max:255',
             'slug' => 'nullable|string|max:255',
             'descripcion' => 'nullable|string',
+            'pagina' => 'nullable|string|max:255',
+            'fila' => 'nullable|string|max:255',
+            'col' => 'nullable|string|max:255',
+            'col2' => 'nullable|string|max:255',
+            'orden' => 'nullable|string|max:255',
         ]);
 
         $categoria = Categoria::find($id);
         $categoria->nombre = $request->nombre;
         $categoria->slug = Str::slug($request->nombre);
         $categoria->descripcion = $request->descripcion;
+        $categoria->pagina = $request->pagina;
+        $categoria->fila = $request->fila;
+        $categoria->col = $request->col;
+        $categoria->col2 = $request->col2;
+        $categoria->orden = $request->orden;
         $categoria->save();
         return redirect()->route('admin.categorias.index')
             ->with('mensaje', 'Categoria actualizada exitosamente.')

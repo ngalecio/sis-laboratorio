@@ -25,7 +25,7 @@
 
                     <button type="button" class="btn btn-primary" style="float: right; margin-left: 10px;"
                         onclick="reporte_pdf()">
-                        <i class="bi bi-person-plus"></i> PDF
+                        <i class="bi bi-file-earmark-pdf"></i> PDF
                     </button>
                     <!-- <button type="button" class="btn btn-primary" style="float: right; margin-left: 10px;"
                         onclick="reporte_todos_pdf()">

@@ -17,6 +17,10 @@
                             <a href="{{ url('/admin/consultas/0/edit') }}" style="float: right; margin-left: 10px;" class="btn btn-success disabled" tabindex="-1" aria-disabled="true">
                                 <i class="bi bi-plus"></i> Nuevo</a>
 
+                                    <button type="button" class="btn btn-primary" style="float: right; margin-left: 10px;" onclick="reporte_pdf()">
+                                        <i class="bi bi-file-earmark-pdf"></i> PDF
+                                    </button>
+
                                                     <!-- <button type="button" class="btn btn-primary" style="float: right; margin-left: 10px;" onclick="reporte_pdf()">
                                                         <i class="bi bi-person-plus"></i> PDF
                                                     </button>

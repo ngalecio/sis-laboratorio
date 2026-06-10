@@ -33,6 +33,7 @@ class Paciente extends Model
         'antecedentes_familiares',
         'establecimiento',
         'cliente_id',
+        'usuario_creacion_id',
     ];
 
     public function catalogo_tipo_persona()
@@ -51,4 +52,11 @@ class Paciente extends Model
     {
         return $this->hasMany(PacienteImagen::class);
     }
+
+    public function usuario()
+    {
+        return $this->belongsTo(User::class, 'usuario_creacion_id', 'id');
+    }
+
+
 }

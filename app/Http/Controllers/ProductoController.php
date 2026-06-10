@@ -19,6 +19,74 @@ class ProductoController extends Controller
      * Display a listing of the resource.
      */
 
+
+    public function listJsonProductosExamen()
+    {
+
+        $productos = Producto::select(
+            'id',
+            'codigo',
+            'nombre',
+            'precio',
+            'stock',
+            'precio_compra',
+            'unidad_medida',
+            'cantidad_por_unidad',
+            'stock_fraccion',
+            'tipo_producto'
+        )
+            ->whereIN('tipo_producto', ['B', 'S'])
+            ->where('estado', 'x')
+            //   ->take(10)->orderBy('id','desc')
+            ->get();
+
+        $categorias = Categoria::with([
+            'productos:id,codigo,nombre,precio,categoria_id,col,ancho_col'
+        ])
+            ->select(
+                'id',
+                'nombre',
+                'pagina',
+                'fila',
+                'col',
+                'col2',
+                'orden',
+                'ancho_col'
+            )
+            ->where('pagina', 1)
+            ->orderBy('fila')
+            ->orderBy('col')
+            ->orderBy('col2')
+            ->get();
+
+
+        $categorias2 = Categoria
+         ::with(['productos:id,codigo,nombre,precio,categoria_id,col,ancho_col'])
+            ->select(
+                'id',
+                'nombre',
+                'pagina',
+                'fila',
+                'col',
+                'col2',
+                'orden',
+                'ancho_col'
+            )
+            ->where('pagina', 2)
+            ->where('orden', '>', 0)
+            ->orderBy('fila')
+            ->orderBy('col')
+            ->orderBy('col2')
+            ->get();
+        // $categorias = Categoria::with([
+        //     'productos:id,codigo,nombre,precio,categoria_id'
+        // ])->get();
+        return response()->json([
+            'data' => $productos,
+            'categorias' => $categorias,
+            'categorias2' => $categorias2
+        ]);
+    }
     public function listJsonProductos()
     {
 
@@ -64,10 +132,13 @@ class ProductoController extends Controller
      //   ->take(10)->orderBy('id','desc')
         ->get();
 
+        $categorias = Categoria::select('id', 'nombre')->where('pagina',1)->get();
+
 
 
         return response()->json([
             'data' => $productos,
+            'categorias' => $categorias
         ]);
     }
 

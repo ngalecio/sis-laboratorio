@@ -24,4 +24,9 @@ class ConsultaDetalle extends Model
     {
         return $this->belongsTo(Consulta::class);
     }
+
+    public function producto()
+    {
+        return $this->belongsTo(Producto::class, 'producto_id', 'id');
+    }
 }

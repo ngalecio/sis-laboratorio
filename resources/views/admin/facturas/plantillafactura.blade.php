@@ -61,7 +61,7 @@
             </tr>
             <tr>
                 <td colspan="3"><strong>Cliente:</strong> {{ $factura->cliente->nombres ?? '-' }} {{ $factura->cliente->apellidos ?? '' }}</td>
-                <td colspan="3"><strong>Cédula/DNI:</strong> {{ $factura->cliente->cedula ?? '-' }}</td>
+                <td colspan="3"><strong>Cédula:</strong> {{ $factura->cliente->cedula ?? '-' }}</td>
             </tr>
             <tr>
                 <td colspan="3"><strong>Dirección:</strong> {{ $factura->cliente->direccion ?? '-' }}</td>

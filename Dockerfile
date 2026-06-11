@@ -45,7 +45,7 @@ WORKDIR /var/www/html
 COPY --from=php-builder /var/www/html /var/www/html
 COPY --from=node-builder /app/public/build ./public/build
 
-# ⚠️ AGREGAR ESTO COMO RESPALDO
+# AGREGAR ESTO COMO RESPALDO
 RUN mkdir -p resources/views && \
     [ -d resources/views ] && echo "Views directory exists" || echo "Views directory missing"
 

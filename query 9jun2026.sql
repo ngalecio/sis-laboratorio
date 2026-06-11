@@ -117,10 +117,40 @@ select * from categorias where pagina= 2 and fila = 1 and col = 1
 
 select * from productos where categoria_id = 47
 
+select * from consultas
+
+select * from pacientes;
+
+
+delete from consulta_detalles;
+delete from consulta_imagens;
+delete from consultas;
+
+ALTER TABLE consultas
+ADD COLUMN user_id BIGINT UNSIGNED NULL;
+
+ALTER TABLE consultas
+ADD COLUMN usuario_creacion_id BIGINT UNSIGNED NULL,
+ADD COLUMN usuario_modificacion_id BIGINT UNSIGNED NULL;
+
+ALTER TABLE pacientes
+ADD COLUMN usuario_creacion_id BIGINT UNSIGNED NULL,
+ADD COLUMN usuario_modificacion_id BIGINT UNSIGNED NULL;
+
+UPDATE pacientes
+SET usuario_creacion_id = FLOOR(1 + RAND() * 3);
+
+
+
+ADD COLUMN user_id BIGINT UNSIGNED NULL;
 
 delete from productos;
 
 ALTER TABLE productos AUTO_INCREMENT = 1;
+
+select * from users;
+
+select * from pacientes;
 
 
 select * from productos where col is null

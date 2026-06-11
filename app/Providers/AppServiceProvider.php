@@ -12,7 +12,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // Código de emergencia para Easypanel: Crea las carpetas si Linux no las encuentra
+        if (!file_exists(resource_path('views'))) {
+            mkdir(resource_path('views'), 0755, true);
+        }
+        if (!file_exists(storage_path('framework/views'))) {
+            mkdir(storage_path('framework/views'), 0755, true);
+        }
     }
 
     /**

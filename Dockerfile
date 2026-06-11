@@ -45,6 +45,11 @@ WORKDIR /var/www/html
 COPY --from=php-builder /var/www/html /var/www/html
 COPY --from=node-builder /app/public/build ./public/build
 
+# ⚠️ AGREGAR ESTO COMO RESPALDO
+RUN mkdir -p resources/views && \
+    [ -d resources/views ] && echo "Views directory exists" || echo "Views directory missing"
+
+
 # Configs
 COPY docker/nginx.conf /etc/nginx/http.d/default.conf
 COPY docker/supervisord.conf /etc/supervisord.conf
